@@ -1,0 +1,16 @@
+{
+  "name": "gh-wiki-chat",
+  "version": "1.0.0",
+  "description": "Chat with a GitHub Wiki!",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
