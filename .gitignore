@@ -2,3 +2,4 @@
 wiki/
 node_modules/
 .env
+*.wiki/
