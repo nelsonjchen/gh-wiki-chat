@@ -11,7 +11,6 @@ import process from "process";
 import { ChatOpenAI } from 'langchain/chat_models';
 
 export const run = async () => {
-  // process.env.LANGCHAIN_TRACING = "true";
   const model = new ChatOpenAI({
     temperature: 0
   });
