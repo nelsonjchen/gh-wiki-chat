@@ -1,3 +1,6 @@
+import { HNSWLib } from "langchain/vectorstores/hnswlib";
+import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+import { MarkdownTextSplitter } from "langchain/text_splitter";
 import { DirectoryLoader } from "langchain/document_loaders/fs/directory";
 import {
   JSONLoader,
@@ -18,7 +21,26 @@ const loader = new DirectoryLoader(
 );
 const docs = await loader.load();
 
-import { MarkdownTextSplitter } from "langchain/text_splitter";
 const splitter = new MarkdownTextSplitter();
 const splitDocs = await splitter.splitDocuments(docs);
-console.log({ splitDocs });
+
+const vectorStore = await HNSWLib.fromDocuments(
+  splitDocs,
+  new OpenAIEmbeddings()
+);
+
+// Save the vector store to a directory
+const directory = "store";
+await vectorStore.save(directory);
+
+// Load the vector store from the same directory
+const loadedVectorStore = await HNSWLib.load(
+  directory,
+  new OpenAIEmbeddings()
+);
+
+// vectorStore and loadedVectorStore are identical
+
+// Simple test to see if it works
+const result = await loadedVectorStore.similaritySearch("video transcode mp4 hevc", 1);
+console.log(result);
