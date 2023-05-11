@@ -20,12 +20,16 @@ const loadedVectorStore = await HNSWLib.load(
 );
 
 /* Initialize the LLM to use to answer the question */
-const model = new OpenAI({});
+const model = new OpenAI({
+  modelName: "gpt-3.5-turbo"
+});
 
 // Create a chain that uses the OpenAI LLM and HNSWLib vector store.
-const chain = RetrievalQAChain.fromLLM(model, loadedVectorStore.asRetriever());
+const chain = RetrievalQAChain.fromLLM(model, loadedVectorStore.asRetriever(), {
+  returnSourceDocuments: true,
+});
 const res = await chain.call({
-  query: "How do I get video off my comma device?",
+  query: "How do I install OP?",
 });
 console.log({ res });
 
