@@ -29,7 +29,7 @@ const chain = RetrievalQAChain.fromLLM(model, loadedVectorStore.asRetriever(), {
   returnSourceDocuments: true,
 });
 const res = await chain.call({
-  query: "How do I install OP?",
+  query: "How do I install OP after my comma 3 is hooked up?",
 });
 console.log({ res });
 
