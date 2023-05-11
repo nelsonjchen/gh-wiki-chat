@@ -8,10 +8,13 @@ import { initializeAgentExecutorWithOptions } from "langchain/agents";
 import { SerpAPI } from "langchain/tools";
 import { Calculator } from "langchain/tools/calculator";
 import process from "process";
+import { ChatOpenAI } from 'langchain/chat_models';
 
 export const run = async () => {
-  process.env.LANGCHAIN_TRACING = "true";
-  const model = new OpenAI({ temperature: 0 });
+  // process.env.LANGCHAIN_TRACING = "true";
+  const model = new ChatOpenAI({
+    temperature: 0
+  });
   const tools = [
     new SerpAPI(process.env.SERPAPI_API_KEY, {
       location: "Austin,Texas,United States",
